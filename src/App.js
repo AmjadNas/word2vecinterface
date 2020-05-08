@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import Header from './Header';
 import Pannels from './Pannels';
-import MySnackBar from './MySnackBar';
-import Button from '@material-ui/core/Button';
 import FullScreenDialog from './FullScreenDialog';
 import MyFab from './MyFab';
 import ProgressDialog from './ProgressDialog';

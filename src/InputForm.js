@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import DenseTable from './FataTable';
 import Button from '@material-ui/core/Button';
+import axios from 'axios';
 
 const InputForm = ({
   modelName,

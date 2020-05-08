@@ -155,12 +155,6 @@ export default function EnhancedTable({ files, removeFile, removeSekected }) {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-  const handleRequestSort = (event, property) => {
-    const isAsc = orderBy === property && order === 'asc';
-    setOrder(isAsc ? 'desc' : 'asc');
-    setOrderBy(property);
-  };
-
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
       const newSelecteds = files.map((n) => n.name);
@@ -236,7 +230,6 @@ export default function EnhancedTable({ files, removeFile, removeSekected }) {
               classes={classes}
               numSelected={selected.length}
               onSelectAllClick={handleSelectAllClick}
-              onRequestSort={handleRequestSort}
               rowCount={files.length}
             />
             <TableBody>
