@@ -13,6 +13,7 @@ import Slide from '@material-ui/core/Slide';
 import { makeStyles } from '@material-ui/core/styles';
 import { Icon } from '@material-ui/core';
 import Axios from 'axios';
+import { api_link } from './api_link';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -32,7 +33,7 @@ const FullScreenDialog = ({ open, handleClose }) => {
   const [models, setModels] = useState([]);
   const classes = useStyles();
   useEffect(() => {
-    Axios.get('http://127.0.0.1:5000/models')
+    Axios.get(`${api_link}models`)
       .then((res) => {
         setModels(res.data);
       })

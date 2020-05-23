@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import DenseTable from './FataTable';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
+import { api_link } from './api_link';
 
 const InputForm = ({
   modelName,
@@ -70,7 +71,7 @@ const InputForm = ({
         },
       };
       axios
-        .post('http://127.0.0.1:5000/results', formData, config)
+        .post(`${api_link}results`, formData, config)
         .then((res) => {
           setTable_data(res.data);
           console.log(res.data);
