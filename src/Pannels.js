@@ -1,8 +1,8 @@
-import React from 'react';
-import UploadFile from './UploadFile';
-import Box from '@material-ui/core/Box';
-import Typography from '@material-ui/core/Typography';
-import InputForm from './InputForm';
+import React from "react";
+import UploadFile from "./UploadFile";
+import Box from "@material-ui/core/Box";
+import Typography from "@material-ui/core/Typography";
+import InputForm from "./InputForm";
 
 const TabPanel = ({ children, value, index, ...other }) => {
   return (
@@ -46,6 +46,7 @@ const Pannels = ({
           setIsLoading={setIsLoading}
           setPercentCompleted={setPercentCompleted}
           setStatus={setStatus}
+          setTitle={setTitle}
         />
       </TabPanel>
     </>
