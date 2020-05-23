@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.js": "/word2vecinterface/static/js/main.ac0e0941.chunk.js",
-    "main.js.map": "/word2vecinterface/static/js/main.ac0e0941.chunk.js.map",
+    "main.js": "/word2vecinterface/static/js/main.bb224415.chunk.js",
+    "main.js.map": "/word2vecinterface/static/js/main.bb224415.chunk.js.map",
     "runtime-main.js": "/word2vecinterface/static/js/runtime-main.e2aa490c.js",
     "runtime-main.js.map": "/word2vecinterface/static/js/runtime-main.e2aa490c.js.map",
     "static/js/2.b18fcda7.chunk.js": "/word2vecinterface/static/js/2.b18fcda7.chunk.js",
     "static/js/2.b18fcda7.chunk.js.map": "/word2vecinterface/static/js/2.b18fcda7.chunk.js.map",
     "index.html": "/word2vecinterface/index.html",
-    "precache-manifest.9001e87d52d733ad5890e76d18f34fe8.js": "/word2vecinterface/precache-manifest.9001e87d52d733ad5890e76d18f34fe8.js",
+    "precache-manifest.8019f919a51f481a916aa2e5f8d24494.js": "/word2vecinterface/precache-manifest.8019f919a51f481a916aa2e5f8d24494.js",
     "service-worker.js": "/word2vecinterface/service-worker.js",
     "static/js/2.b18fcda7.chunk.js.LICENSE.txt": "/word2vecinterface/static/js/2.b18fcda7.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.e2aa490c.js",
     "static/js/2.b18fcda7.chunk.js",
-    "static/js/main.ac0e0941.chunk.js"
+    "static/js/main.bb224415.chunk.js"
   ]
 }

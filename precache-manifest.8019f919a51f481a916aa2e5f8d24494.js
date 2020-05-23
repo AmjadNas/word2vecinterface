@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "2280dc138b507a133f7d49b758b60e46",
+    "revision": "3f8d6d6c62d0b65898112d0e7cff2d98",
     "url": "/word2vecinterface/index.html"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/word2vecinterface/static/js/2.b18fcda7.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "b36bd54041310a9a8ea3",
-    "url": "/word2vecinterface/static/js/main.ac0e0941.chunk.js"
+    "revision": "d742065cbc4e23568492",
+    "url": "/word2vecinterface/static/js/main.bb224415.chunk.js"
   },
   {
     "revision": "9f2ed6e4e11c245c0f36",
