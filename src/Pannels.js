@@ -25,6 +25,7 @@ const Pannels = ({
   setIsLoading,
   setPercentCompleted,
   setStatus,
+  setTitle,
 }) => {
   return (
     <>
@@ -35,6 +36,7 @@ const Pannels = ({
           setIsLoading={setIsLoading}
           setPercentCompleted={setPercentCompleted}
           setStatus={setStatus}
+          setTitle={setTitle}
         />
       </TabPanel>
       <TabPanel value={value} index={1}>

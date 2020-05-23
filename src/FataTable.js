@@ -14,8 +14,10 @@ const useStyles = makeStyles({
   },
 });
 
-export default function DenseTable({ cols, rows }) {
+export default function DenseTable({ data }) {
   const classes = useStyles();
+  const rows = Object.keys(data);
+  const cols = Object.keys(data[rows[0]]);
 
   return (
     <TableContainer component={Paper}>
@@ -24,7 +26,7 @@ export default function DenseTable({ cols, rows }) {
           <TableRow>
             <TableCell></TableCell>
             {cols.map((col, index) => (
-              <TableCell key={index} align="right">
+              <TableCell key={index} align="center">
                 {col}
               </TableCell>
             ))}
@@ -33,13 +35,14 @@ export default function DenseTable({ cols, rows }) {
         <TableBody>
           {rows.map((row) => (
             <TableRow key={row.name}>
-              <TableCell component="th" scope="row">
-                {row.term}
+              <TableCell component="th" scope="row" align="center">
+                {row}
               </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
+              {Object.values(data[row]).map((k, v) => (
+                <TableCell key={v} align="center">
+                  {k}
+                </TableCell>
+              ))}
             </TableRow>
           ))}
         </TableBody>

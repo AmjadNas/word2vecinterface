@@ -9,6 +9,7 @@ const UploadFile = ({
   setIsLoading,
   setPercentCompleted,
   setStatus,
+  setTitle,
 }) => {
   const [files, setFiles] = useState({ files: [], valid: true });
   const [name, setName] = useState({ name: '', valid: true, msg: '' });
@@ -56,7 +57,7 @@ const UploadFile = ({
     } else {
       const regx = new RegExp('/^[a-zA-Z]+$/');
 
-      if (!regx.test(name.name)) {
+      if (regx.test(name.name)) {
         setName({
           name: ``,
           valid: false,
@@ -75,12 +76,11 @@ const UploadFile = ({
     if (validate()) {
       const formData = new FormData();
       files.files.forEach((file) => formData.append(file.name, file));
-      //  const blob = new Blob([name], { type: 'text/plain' });
-      formData.append('adadasd', name);
-      console.log(formData.get('adadasd'));
-      console.log(formData);
+      formData.append('model', name.name);
+      console.log(formData.get('model'));
       setOpenDialog(true);
       setIsLoading(true);
+      setTitle('Uploadeding Files');
 
       const config = {
         headers: {
@@ -92,16 +92,23 @@ const UploadFile = ({
             (progressEvent.loaded * 100) / progressEvent.total
           );
           setPercentCompleted(percentCompleted);
+          if (percentCompleted == 100) setIsLoading(false);
+          setStatus(
+            "Files uploaded suucessefully and is being processed, please wait or comeback later! after the model is finished training you'll see its name in the list."
+          );
+          setTitle('Upload sucessfull');
         },
       };
       axios
         .post('http://127.0.0.1:5000/', formData, config)
         .then((res) => {
           setIsLoading(false);
-          setStatus('Data uploaded sucessfully');
+          setTitle('Training sucessfull');
+          setStatus('Model Trained! Refresh your page to see it in the list.');
         })
         .catch((error) => {
           console.log(error.response.data);
+          setTitle('Error');
           setIsLoading(false);
           setStatus(error.response.data);
         });
@@ -158,7 +165,7 @@ const UploadFile = ({
         </form>
       </div>
 
-      <div className="row">
+      <div className="row mt-5">
         <EnhancedTable
           files={files.files}
           removeFile={removeFile}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Dialog from '@material-ui/core/Dialog';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItem from '@material-ui/core/ListItem';
@@ -12,6 +12,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
 import { makeStyles } from '@material-ui/core/styles';
 import { Icon } from '@material-ui/core';
+import Axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -28,8 +29,15 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 const FullScreenDialog = ({ open, handleClose }) => {
+  const [models, setModels] = useState([]);
   const classes = useStyles();
-
+  useEffect(() => {
+    Axios.get('http://127.0.0.1:5000/models')
+      .then((res) => {
+        setModels(res.data);
+      })
+      .catch((error) => console.log(error.response.data));
+  }, []);
   const setvalue = (e) => {
     handleClose(e, e.target.innerText);
   };
@@ -57,15 +65,15 @@ const FullScreenDialog = ({ open, handleClose }) => {
         </Toolbar>
       </AppBar>
       <List onClick={setvalue}>
-        <ListItem button>
-          <Icon />
-          <ListItemText primary="Phone ringtone" />
-        </ListItem>
-        <Divider />
-        <ListItem button>
-          <Icon />
-          <ListItemText primary="Default notification ringtone" />
-        </ListItem>
+        {models.map((model) => (
+          <div key={model}>
+            <ListItem button>
+              <Icon />
+              <ListItemText primary={model} />
+            </ListItem>
+            <Divider />
+          </div>
+        ))}
       </List>
     </Dialog>
   );

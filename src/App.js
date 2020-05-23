@@ -13,6 +13,7 @@ const App = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [percentCompleted, setPercentCompleted] = useState(0);
   const [status, setStatus] = useState('');
+  const [title, setTitle] = useState('');
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -39,6 +40,7 @@ const App = () => {
         setIsLoading={setIsLoading}
         setPercentCompleted={setPercentCompleted}
         setStatus={setStatus}
+        setTitle={setTitle}
       />
       <MyFab onClick={handleClickOpen} />
       <FullScreenDialog open={open} handleClose={handleClose} />
@@ -48,7 +50,7 @@ const App = () => {
         open={openDialog}
         loading={isLoading}
         status={status}
-        title="dialog"
+        title={title}
       />
     </>
   );

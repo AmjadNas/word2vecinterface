@@ -43,7 +43,7 @@ const Header = ({ value, handleChange }) => {
           onChange={handleChange}
           aria-label="simple tabs example"
         >
-          <Tab label="Upload Files" {...a11yProps(0)} />
+          <Tab label="Train Model" {...a11yProps(0)} />
           <Tab label="Compare Words" {...a11yProps(1)} />
         </Tabs>
       </AppBar>
