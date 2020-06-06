@@ -3,6 +3,7 @@ import axios from "axios";
 import EnhancedTable from "./Table";
 import Button from "@material-ui/core/Button";
 import { api_link } from "./api_link";
+import LanguageSelector from "./LanguageSelector";
 
 const UploadFile = ({
   modelName,
@@ -14,6 +15,7 @@ const UploadFile = ({
 }) => {
   const [files, setFiles] = useState({ files: [], valid: true });
   const [name, setName] = useState({ name: "", valid: true, msg: "" });
+  const [lang, setLang] = useState("EN");
 
   useEffect(() => {
     setName({ name: modelName, msg: "", valid: true });
@@ -76,7 +78,8 @@ const UploadFile = ({
       const formData = new FormData();
       files.files.forEach((file) => formData.append(file.name, file));
       formData.append("model", name.name);
-
+      formData.append("lang", lang);
+      console.log(formData.get("lang"));
       setOpenDialog(true);
       setIsLoading(true);
       setTitle("Uploadeding Files");
@@ -156,6 +159,14 @@ const UploadFile = ({
               ""
             )}
           </div>
+          <div className="form-group mx-sm-3 mb-2">
+            <LanguageSelector
+              langs={["EN", "AR"]}
+              setLang={setLang}
+              lang={lang}
+            />
+          </div>
+
           <button type="submit" className="btn btn-primary ">
             Submit
           </button>

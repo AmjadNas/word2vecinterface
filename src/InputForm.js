@@ -3,6 +3,7 @@ import DenseTable from "./FataTable";
 import Button from "@material-ui/core/Button";
 import axios from "axios";
 import { api_link } from "./api_link";
+import LanguageSelector from "./LanguageSelector";
 
 const InputForm = ({
   modelName,
@@ -19,6 +20,7 @@ const InputForm = ({
   const [file, setFiles] = useState({ file: null, valid: true });
   const [wMsgs, setWMsgs] = useState({ msg: "", valid: true });
   const [table_data, setTable_data] = useState(null);
+  const [lang, setLang] = useState("EN");
 
   useEffect(() => {
     setName({ name: modelName, valid: true });
@@ -65,6 +67,7 @@ const InputForm = ({
 
       formData.append("words", e.target.words.value);
       formData.append("model", name.name);
+      formData.append("lang", lang);
 
       const config = {
         headers: {
@@ -143,7 +146,13 @@ const InputForm = ({
               ""
             )}
           </div>
-
+          <div className="form-group mx-sm-3 mb-2">
+            <LanguageSelector
+              langs={["EN", "AR"]}
+              setLang={setLang}
+              lang={lang}
+            />
+          </div>
           <button type="submit" className="btn btn-primary ">
             Submit
           </button>
