@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import Header from './Header';
-import Pannels from './Pannels';
-import FullScreenDialog from './FullScreenDialog';
-import MyFab from './MyFab';
-import ProgressDialog from './ProgressDialog';
+import Header from '../components/Header';
+import Pannels from '../main components/Pannels';
+import FullScreenDialog from '../components/FullScreenDialog';
+import MyFab from '../components/MyFab';
+import ProgressDialog from '../components/ProgressDialog';
 
 const App = () => {
   const [value, setValue] = useState(0);
@@ -30,6 +30,7 @@ const App = () => {
   const handleChangeIndex = (e, index) => {
     setValue(index);
   };
+
   return (
     <>
       <Header value={value} handleChange={handleChangeIndex} />

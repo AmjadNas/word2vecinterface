@@ -1,23 +1,22 @@
-import React, { useState, useEffect } from "react";
-import Dialog from "@material-ui/core/Dialog";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItem from "@material-ui/core/ListItem";
-import List from "@material-ui/core/List";
-import Divider from "@material-ui/core/Divider";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
-import CloseIcon from "@material-ui/icons/Close";
-import Slide from "@material-ui/core/Slide";
-import { makeStyles } from "@material-ui/core/styles";
-import { Icon } from "@material-ui/core";
-import Axios from "axios";
-import { api_link } from "./api_link";
+import React, { useState, useEffect } from 'react';
+import Dialog from '@material-ui/core/Dialog';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItem from '@material-ui/core/ListItem';
+import List from '@material-ui/core/List';
+import Divider from '@material-ui/core/Divider';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import CloseIcon from '@material-ui/icons/Close';
+import Slide from '@material-ui/core/Slide';
+import { makeStyles } from '@material-ui/core/styles';
+import { Icon } from '@material-ui/core';
+import Service from '../Service';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
-    position: "relative",
+    position: 'relative',
   },
   title: {
     marginLeft: theme.spacing(2),
@@ -33,11 +32,15 @@ const FullScreenDialog = ({ open, handleClose }) => {
   const [models, setModels] = useState([]);
   const classes = useStyles();
   useEffect(() => {
-    Axios.get(`${api_link}models`)
-      .then((res) => {
+    async function fetchData() {
+      try {
+        const res = await Service.getModels();
         setModels(res.data);
-      })
-      .catch((error) => console.log(error));
+      } catch (error) {
+        console.log(error.response.data);
+      }
+    }
+    fetchData();
   }, []);
   const setvalue = (e) => {
     handleClose(e, e.target.innerText);

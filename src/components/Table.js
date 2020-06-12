@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { lighten, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -17,7 +16,6 @@ import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import DeleteIcon from '@material-ui/icons/Delete';
-import FilterListIcon from '@material-ui/icons/FilterList';
 
 const headCells = [
   {
@@ -208,7 +206,7 @@ export default function EnhancedTable({ files, removeFile, removeSekected }) {
 
     removeFile([fName]);
     if (selectedIndex >= 0) {
-      setSelected(selected.filter((name) => name != fName));
+      setSelected(selected.filter((name) => name !== fName));
     }
   };
 

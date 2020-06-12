@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import EnhancedTable from "./Table";
-import Button from "@material-ui/core/Button";
-import { api_link } from "./api_link";
-import LanguageSelector from "./LanguageSelector";
+import React, { useState, useEffect } from 'react';
+import EnhancedTable from '../components/Table';
+import Button from '@material-ui/core/Button';
+import LanguageSelector from '../components/LanguageSelector';
+import Service from '../Service';
 
 const UploadFile = ({
   modelName,
@@ -14,11 +13,11 @@ const UploadFile = ({
   setTitle,
 }) => {
   const [files, setFiles] = useState({ files: [], valid: true });
-  const [name, setName] = useState({ name: "", valid: true, msg: "" });
-  const [lang, setLang] = useState("EN");
+  const [name, setName] = useState({ name: '', valid: true, msg: '' });
+  const [lang, setLang] = useState('EN');
 
   useEffect(() => {
-    setName({ name: modelName, msg: "", valid: true });
+    setName({ name: modelName, msg: '', valid: true });
   }, [modelName]);
 
   const onChange = (e) => {
@@ -37,32 +36,32 @@ const UploadFile = ({
   const validate = () => {
     let flag = true;
     if (files.files.length === 0) {
-      setFiles({ files: [], valid: false, msg: "field is required" });
+      setFiles({ files: [], valid: false, msg: 'field is required' });
       flag = false;
     } else {
       for (const f of files.files) {
-        if (!f.name.endsWith(".txt")) {
+        if (!f.name.endsWith('.txt')) {
           setFiles({
             files: [],
             valid: false,
-            msg: "all files must .txt format",
+            msg: 'all files must .txt format',
           });
           flag = false;
           break;
         }
       }
     }
-    if (name.name === "") {
-      setName({ name: "", valid: false, msg: "field is required" });
+    if (name.name === '') {
+      setName({ name: '', valid: false, msg: 'field is required' });
       flag = false;
     } else {
-      const regx = new RegExp("/^[a-zA-Z]+$/");
+      const regx = new RegExp('/^[a-zA-Z]+$/');
 
       if (regx.test(name.name)) {
         setName({
           name: ``,
           valid: false,
-          msg: "illegal model name must be obly alphabetic characters",
+          msg: 'illegal model name must be obly alphabetic characters',
         });
 
         flag = false;
@@ -72,46 +71,40 @@ const UploadFile = ({
     return flag;
   };
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
     if (validate()) {
       const formData = new FormData();
       files.files.forEach((file) => formData.append(file.name, file));
-      formData.append("model", name.name);
-      formData.append("lang", lang);
-      console.log(formData.get("lang"));
+      formData.append('model', name.name);
+      formData.append('lang', lang);
+      console.log(formData.get('lang'));
       setOpenDialog(true);
       setIsLoading(true);
-      setTitle("Uploadeding Files");
+      setTitle('Uploadeding Files');
 
-      const config = {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-        onUploadProgress: (progressEvent) => {
-          let percentCompleted = Math.round(
-            (progressEvent.loaded * 100) / progressEvent.total
-          );
-          setPercentCompleted(percentCompleted);
-          if (percentCompleted == 100) setIsLoading(false);
-          setStatus(
-            "Files uploaded suucessefully and is being processed, please wait or comeback later! after the model is finished training you'll see its name in the list."
-          );
-          setTitle("Upload sucessfull");
-        },
+      const listener = (progressEvent) => {
+        let percentCompleted = Math.round(
+          (progressEvent.loaded * 100) / progressEvent.total
+        );
+        setPercentCompleted(percentCompleted);
+        if (percentCompleted === 100) setIsLoading(false);
+        setStatus(
+          "Files uploaded suucessefully and is being processed, please wait or comeback later! after the model is finished training you'll see its name in the list."
+        );
+        setTitle('Upload sucessfull');
       };
-      axios
-        .post(api_link, formData, config)
-        .then((res) => {
-          setIsLoading(false);
-          setTitle("Training sucessfull");
-          setStatus("Model Trained! Refresh your page to see it in the list.");
-        })
-        .catch((error) => {
-          setTitle("Error");
-          setIsLoading(false);
-          setStatus(error.response.data);
-        });
+
+      try {
+        const res = await Service.sendTrainData(formData, listener);
+        setIsLoading(false);
+        setTitle('Training sucessfull');
+        setStatus('Model Trained! Refresh your page to see it in the list.');
+      } catch (error) {
+        setTitle('Error');
+        setIsLoading(false);
+        setStatus(error.response.data);
+      }
     }
   };
   return (
@@ -123,9 +116,9 @@ const UploadFile = ({
               id="uplodaer"
               type="file"
               className={`form-control-file ml-2 ${
-                files.valid ? "" : "is-invalid"
+                files.valid ? '' : 'is-invalid'
               }`}
-              style={{ display: "none" }}
+              style={{ display: 'none' }}
               onChange={onChange}
               multiple
             />
@@ -137,7 +130,7 @@ const UploadFile = ({
             {!files.valid ? (
               <div className="invalid-feedback"> {files.msg}.</div>
             ) : (
-              ""
+              ''
             )}
           </div>
           <div className="form-group mx-sm-3 mb-2">
@@ -145,23 +138,23 @@ const UploadFile = ({
             <input
               id="model"
               type="text"
-              className={`form-control ml-2 ${name.valid ? "" : "is-invalid"}`}
+              className={`form-control ml-2 ${name.valid ? '' : 'is-invalid'}`}
               placeholder="Type model name or choose an exising model."
               value={name.name}
               onChange={(e) =>
-                setName({ name: e.target.value, valid: true, msg: "" })
+                setName({ name: e.target.value, valid: true, msg: '' })
               }
             />
 
             {!name.valid ? (
               <div className="invalid-feedback"> {name.msg}.</div>
             ) : (
-              ""
+              ''
             )}
           </div>
           <div className="form-group mx-sm-3 mb-2">
             <LanguageSelector
-              langs={["EN", "AR"]}
+              langs={['EN', 'AR']}
               setLang={setLang}
               lang={lang}
             />

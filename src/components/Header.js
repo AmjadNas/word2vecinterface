@@ -5,6 +5,9 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import { Button } from '@material-ui/core';
+import { useHistory } from 'react-router';
+import Service from '../Service';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,6 +30,12 @@ function a11yProps(index) {
 
 const Header = ({ value, handleChange }) => {
   const classes = useStyles();
+  const history = useHistory();
+
+  const handleClck = (e) => {
+    Service.logOut();
+    history.replace('/login');
+  };
 
   return (
     <div className={classes.root} color="default">
@@ -35,6 +44,15 @@ const Header = ({ value, handleChange }) => {
           <Typography variant="h6" className={classes.title}>
             Word2Vec Utility
           </Typography>
+
+          <Button
+            variant="contained"
+            color="primary"
+            component="span"
+            onClick={handleClck}
+          >
+            Log Out
+          </Button>
         </Toolbar>
 
         <Tabs
