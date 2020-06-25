@@ -28,7 +28,13 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const FullScreenDialog = ({ open, handleClose }) => {
+const FullScreenDialog = ({
+  open,
+  handleClose,
+  setStatus,
+  setTitle,
+  setOpenDialog,
+}) => {
   const [models, setModels] = useState([]);
   const classes = useStyles();
   useEffect(() => {
@@ -37,7 +43,12 @@ const FullScreenDialog = ({ open, handleClose }) => {
         const res = await Service.getModels();
         setModels(res.data);
       } catch (error) {
-        console.log(error.response.data);
+        setOpenDialog(true);
+        setTitle('Error');
+        if (error.response) setStatus(error.response.data.error.message);
+        else setStatus(error.message);
+
+        // console.log(error.response.data.error.message);
       }
     }
     fetchData();

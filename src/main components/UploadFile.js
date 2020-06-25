@@ -28,9 +28,9 @@ const UploadFile = ({
   };
 
   const removeFile = (e) => {
-    const fs = files.filter((file) => !e.includes(file.name));
+    const fs = files.files.filter((file) => !e.includes(file.name));
     console.log(e, fs);
-    setFiles(fs);
+    setFiles({ files: fs, valid: true });
   };
 
   const validate = () => {
@@ -103,7 +103,8 @@ const UploadFile = ({
       } catch (error) {
         setTitle('Error');
         setIsLoading(false);
-        setStatus(error.response.data);
+        if (error.response) setStatus(error.response.data.error.message);
+        else setStatus(error.message);
       }
     }
   };

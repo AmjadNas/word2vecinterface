@@ -21,20 +21,21 @@ const ProgressDialog = ({
       open={open}
       onClose={handleClose}
       aria-labelledby="form-dialog-title"
-      onClick={handleClose}
     >
       <DialogTitle id="form-dialog-title">{title}</DialogTitle>
       <DialogContent>
         {loading ? (
           <CircularProgress variant="determinate" value={progress} />
         ) : (
-          <DialogContentText>
-            <Typography>{status}</Typography>
+          <DialogContentText component={'div'}>
+            <Typography component={'p'}>{status}</Typography>
           </DialogContentText>
         )}
       </DialogContent>
       <DialogActions>
-        <Button color="primary">OK</Button>
+        <Button onClick={handleClose} color="primary">
+          OK
+        </Button>
       </DialogActions>
     </Dialog>
   );

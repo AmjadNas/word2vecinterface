@@ -44,7 +44,13 @@ const App = () => {
         setTitle={setTitle}
       />
       <MyFab onClick={handleClickOpen} />
-      <FullScreenDialog open={open} handleClose={handleClose} />
+      <FullScreenDialog
+        open={open}
+        handleClose={handleClose}
+        setOpenDialog={setOpenDialog}
+        setStatus={setStatus}
+        setTitle={setTitle}
+      />
       <ProgressDialog
         handleClose={() => setOpenDialog(false)}
         progress={percentCompleted}

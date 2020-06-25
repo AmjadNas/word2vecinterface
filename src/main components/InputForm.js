@@ -71,7 +71,8 @@ const InputForm = ({
       } catch (e) {
         setOpenDialog(true);
         setTitle('Error');
-        setStatus('error.response.data');
+        if (error.response) setStatus(error.response.data.error.message);
+        else setStatus(error.message);
       }
     }
   };

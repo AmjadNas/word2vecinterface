@@ -1,5 +1,5 @@
 import axios from 'axios';
-const api_link = 'http://127.0.0.1:5000';
+const api_link = 'http://132.75.249.68:80';
 
 const setCookie = (data, minutes) => {
   const dt = new Date();
@@ -57,7 +57,8 @@ class ServiceObj {
   }
 
   logOut() {
-    document.cookie = 'user=; expires=Thu, 01 Jan 1970 00:00:00 GMT;';
+    document.cookie = 'user=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
+    delete axios.defaults.headers.common.Authorization;
   }
 }
 
