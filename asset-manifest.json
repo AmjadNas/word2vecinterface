@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.js": "/word2vecinterface/static/js/main.d8ade77d.chunk.js",
-    "main.js.map": "/word2vecinterface/static/js/main.d8ade77d.chunk.js.map",
-    "runtime-main.js": "/word2vecinterface/static/js/runtime-main.e2aa490c.js",
-    "runtime-main.js.map": "/word2vecinterface/static/js/runtime-main.e2aa490c.js.map",
-    "static/js/2.66a4a443.chunk.js": "/word2vecinterface/static/js/2.66a4a443.chunk.js",
-    "static/js/2.66a4a443.chunk.js.map": "/word2vecinterface/static/js/2.66a4a443.chunk.js.map",
+    "main.js": "/word2vecinterface/static/js/main.a05294d1.chunk.js",
+    "main.js.map": "/word2vecinterface/static/js/main.a05294d1.chunk.js.map",
+    "runtime-main.js": "/word2vecinterface/static/js/runtime-main.3f8d4e43.js",
+    "runtime-main.js.map": "/word2vecinterface/static/js/runtime-main.3f8d4e43.js.map",
+    "static/js/2.4a700a6d.chunk.js": "/word2vecinterface/static/js/2.4a700a6d.chunk.js",
+    "static/js/2.4a700a6d.chunk.js.map": "/word2vecinterface/static/js/2.4a700a6d.chunk.js.map",
     "index.html": "/word2vecinterface/index.html",
-    "precache-manifest.0619e19d50f257b3c85e107e204fa9be.js": "/word2vecinterface/precache-manifest.0619e19d50f257b3c85e107e204fa9be.js",
+    "precache-manifest.535f31e8ffec11b430a6fa893abb3b24.js": "/word2vecinterface/precache-manifest.535f31e8ffec11b430a6fa893abb3b24.js",
     "service-worker.js": "/word2vecinterface/service-worker.js",
-    "static/js/2.66a4a443.chunk.js.LICENSE.txt": "/word2vecinterface/static/js/2.66a4a443.chunk.js.LICENSE.txt"
+    "static/js/2.4a700a6d.chunk.js.LICENSE.txt": "/word2vecinterface/static/js/2.4a700a6d.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.e2aa490c.js",
-    "static/js/2.66a4a443.chunk.js",
-    "static/js/main.d8ade77d.chunk.js"
+    "static/js/runtime-main.3f8d4e43.js",
+    "static/js/2.4a700a6d.chunk.js",
+    "static/js/main.a05294d1.chunk.js"
   ]
 }
