@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import DenseTable from "../components/DataTable";
-import Button from "@material-ui/core/Button";
-import LanguageSelector from "../components/LanguageSelector";
-import Service from "../Service";
+import React, { useState, useEffect } from 'react';
+import DenseTable from '../components/DataTable';
+import Button from '@material-ui/core/Button';
+import LanguageSelector from '../components/LanguageSelector';
+import Service from '../Service';
 
 const InputForm = ({
   modelName,
@@ -12,11 +12,11 @@ const InputForm = ({
   setStatus,
   setTitle,
 }) => {
-  const [name, setName] = useState({ name: "", valid: true });
+  const [name, setName] = useState({ name: '', valid: true });
   const [file, setFiles] = useState({ file: null, valid: true });
-  const [wMsgs, setWMsgs] = useState({ msg: "", valid: true });
+  const [wMsgs, setWMsgs] = useState({ msg: '', valid: true });
   const [table_data, setTable_data] = useState(null);
-  const [lang, setLang] = useState("EN");
+  const [lang, setLang] = useState('EN');
 
   useEffect(() => {
     setName({ name: modelName, valid: true });
@@ -25,22 +25,22 @@ const InputForm = ({
   const validate = (text) => {
     let flag = true;
     if (!file.file) {
-      setFiles({ file: null, valid: false, msg: "field is required" });
+      setFiles({ file: null, valid: false, msg: 'field is required' });
       flag = false;
-    } else if (!file.file.name.endsWith(".txt")) {
-      setFiles({ file: null, valid: false, msg: "field must be .txt format" });
-      flag = false;
-    }
-    if (name.name === "") {
-      setName({ name: "", valid: false });
+    } else if (!file.file.name.endsWith('.txt')) {
+      setFiles({ file: null, valid: false, msg: 'field must be .txt format' });
       flag = false;
     }
-    if (text === "") {
-      setWMsgs({ msg: "input required", valid: false });
+    if (name.name === '') {
+      setName({ name: '', valid: false });
+      flag = false;
+    }
+    if (text === '') {
+      setWMsgs({ msg: 'input required', valid: false });
       flag = false;
     } else {
-      const regx = new RegExp("/^[a-zA-Z]+$/");
-      for (const str of text.split(" ")) {
+      const regx = new RegExp('/^[a-zA-Z]+$/');
+      for (const str of text.split(' ')) {
         if (regx.test(str)) {
           setWMsgs({
             msg: `${str} must only contain characters`,
@@ -59,20 +59,24 @@ const InputForm = ({
     e.preventDefault();
     const formData = new FormData();
     if (validate(e.target.words.value)) {
-      formData.append("file", file.file);
+      formData.append('file', file.file);
 
-      formData.append("words", e.target.words.value);
-      formData.append("model", name.name);
-      formData.append("lang", lang);
+      formData.append('words', e.target.words.value);
+      formData.append('model', name.name);
+      formData.append('lang', lang);
 
       try {
         const res = await Service.sendCompareData(formData);
         setTable_data(res.data);
       } catch (error) {
         setOpenDialog(true);
-        setTitle("Error");
-        if (error.response) setStatus(error.response.data.error.message);
-        else setStatus(error.message);
+        if (error.response) {
+          setStatus(error.response.data.error.message);
+          setTitle(error.response.data.error.type);
+        } else {
+          setTitle('Error');
+          setStatus(error.message);
+        }
       }
     }
   };
@@ -90,9 +94,9 @@ const InputForm = ({
               id="uplodaer"
               type="file"
               className={`form-control-file ml-2 ${
-                file.valid ? "" : "is-invalid"
+                file.valid ? '' : 'is-invalid'
               }`}
-              style={{ display: "none" }}
+              style={{ display: 'none' }}
               onChange={onChange}
             />
             <label htmlFor="uplodaer">
@@ -103,7 +107,7 @@ const InputForm = ({
             {!file.valid ? (
               <div className="invalid-feedback"> {file.msg}.</div>
             ) : (
-              ""
+              ''
             )}
           </div>
           <div className="form-group mx-sm-3 mb-2">
@@ -112,20 +116,20 @@ const InputForm = ({
               id="words"
               name="words"
               type="text"
-              className={`form-control ml-2 ${wMsgs.valid ? "" : "is-invalid"}`}
+              className={`form-control ml-2 ${wMsgs.valid ? '' : 'is-invalid'}`}
               placeholder="Words seperated by a comma."
             />
             {!wMsgs.valid ? (
               <div className="invalid-feedback">{wMsgs.msg}.</div>
             ) : (
-              ""
+              ''
             )}
           </div>
 
           <div className="form-group mx-sm-3 mb-2">
             <input
               type="text"
-              className={`form-control ${name.valid ? "" : "is-invalid"}`}
+              className={`form-control ${name.valid ? '' : 'is-invalid'}`}
               placeholder="Model Name."
               value={name.name}
               readOnly
@@ -133,12 +137,12 @@ const InputForm = ({
             {!name.valid ? (
               <div className="invalid-feedback">model name is required.</div>
             ) : (
-              ""
+              ''
             )}
           </div>
           <div className="form-group mx-sm-3 mb-2">
             <LanguageSelector
-              langs={["EN", "AR"]}
+              langs={['EN', 'AR']}
               setLang={setLang}
               lang={lang}
             />
@@ -154,7 +158,7 @@ const InputForm = ({
           <DenseTable data={table_data} />
         </div>
       ) : (
-        ""
+        ''
       )}
     </div>
   );

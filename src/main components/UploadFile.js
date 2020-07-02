@@ -101,10 +101,14 @@ const UploadFile = ({
         setTitle('Training sucessfull');
         setStatus('Model Trained! Refresh your page to see it in the list.');
       } catch (error) {
-        setTitle('Error');
         setIsLoading(false);
-        if (error.response) setStatus(error.response.data.error.message);
-        else setStatus(error.message);
+        if (error.response) {
+          setStatus(error.response.data.error.message);
+          setTitle(error.response.data.error.type);
+        } else {
+          setTitle('Error');
+          setStatus(error.message);
+        }
       }
     }
   };

@@ -44,9 +44,13 @@ const FullScreenDialog = ({
         setModels(res.data);
       } catch (error) {
         setOpenDialog(true);
-        setTitle('Error');
-        if (error.response) setStatus(error.response.data.error.message);
-        else setStatus(error.message);
+        if (error.response) {
+          setStatus(error.response.data.error.message);
+          setTitle(error.response.data.error.type);
+        } else {
+          setTitle('Error');
+          setStatus(error.message);
+        }
 
         // console.log(error.response.data.error.message);
       }

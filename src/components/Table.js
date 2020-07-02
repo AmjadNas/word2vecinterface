@@ -155,7 +155,7 @@ export default function EnhancedTable({ files, removeFile, removeSekected }) {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = files.map((n) => n.name);
+      const newSelecteds = displayedFoles.map((n) => n.name);
       setSelected(newSelecteds);
       return;
     }
@@ -209,6 +209,9 @@ export default function EnhancedTable({ files, removeFile, removeSekected }) {
       setSelected(selected.filter((name) => name !== fName));
     }
   };
+  const indexOfLastPost = (page + 1) * rowsPerPage;
+  const indexOfFirstPost = indexOfLastPost - rowsPerPage;
+  const displayedFoles = files.slice(indexOfFirstPost, indexOfLastPost);
 
   return (
     <div className={classes.root}>
@@ -228,10 +231,10 @@ export default function EnhancedTable({ files, removeFile, removeSekected }) {
               classes={classes}
               numSelected={selected.length}
               onSelectAllClick={handleSelectAllClick}
-              rowCount={files.length}
+              rowCount={displayedFoles.length}
             />
             <TableBody>
-              {files.map((row, index) => {
+              {displayedFoles.map((row, index) => {
                 const isItemSelected = isSelected(row.name);
                 const labelId = `enhanced-table-checkbox-${index}`;
 
@@ -284,7 +287,7 @@ export default function EnhancedTable({ files, removeFile, removeSekected }) {
           </Table>
         </TableContainer>
         <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
+          rowsPerPageOptions={[5, 10]}
           component="div"
           count={files.length}
           rowsPerPage={rowsPerPage}
