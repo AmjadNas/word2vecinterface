@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/word2vecinterface/precache-manifest.22ad7414084cf0491a01400f5d30d8ac.js"
+  "/word2vecinterface/precache-manifest.bf4e430eab146b28a534132b0a35a5af.js"
 );
 
 self.addEventListener('message', (event) => {
