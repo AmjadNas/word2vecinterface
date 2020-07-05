@@ -29,7 +29,7 @@ const UploadFile = ({
 
   const removeFile = (e) => {
     const fs = files.files.filter((file) => !e.includes(file.name));
-    console.log(e, fs);
+
     setFiles({ files: fs, valid: true });
   };
 
@@ -78,7 +78,7 @@ const UploadFile = ({
       files.files.forEach((file) => formData.append(file.name, file));
       formData.append('model', name.name);
       formData.append('lang', lang);
-      console.log(formData.get('lang'));
+
       setOpenDialog(true);
       setIsLoading(true);
       setTitle('Uploadeding Files');
@@ -88,18 +88,18 @@ const UploadFile = ({
           (progressEvent.loaded * 100) / progressEvent.total
         );
         setPercentCompleted(percentCompleted);
-        if (percentCompleted === 100) setIsLoading(false);
-        setStatus(
-          "Files uploaded suucessefully and is being processed, please wait or comeback later! after the model is finished training you'll see its name in the list."
-        );
-        setTitle('Upload sucessfull');
+        if (percentCompleted === 100) {
+          setIsLoading(false);
+        }
       };
 
       try {
         const res = await Service.sendTrainData(formData, listener);
         setIsLoading(false);
-        setTitle('Training sucessfull');
-        setStatus('Model Trained! Refresh your page to see it in the list.');
+        setStatus(
+          'Files uploaded suucessefully and is being processed, please wait or comeback later :)'
+        );
+        setTitle('Upload sucessfull');
       } catch (error) {
         setIsLoading(false);
         if (error.response) {

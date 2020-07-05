@@ -1,5 +1,8 @@
 import axios from 'axios';
-const api_link = 'http://132.75.249.68:80';
+const production = true;
+const api_link = production
+  ? 'http://132.75.249.68:80'
+  : 'http://127.0.0.1:5000';
 
 const setCookie = (data, minutes) => {
   const dt = new Date();
@@ -32,6 +35,7 @@ class ServiceObj {
     const config = {
       headers: {
         'Content-Type': 'multipart/form-data',
+        'Access-Control-Allow-Origin': '*',
       },
     };
     return await axios.post(`${api_link}/results`, form, config);
@@ -41,6 +45,7 @@ class ServiceObj {
     const config = {
       headers: {
         'Content-Type': 'multipart/form-data',
+        'Access-Control-Allow-Origin': '*',
       },
       onUploadProgress: listener,
     };
@@ -73,6 +78,7 @@ const Service = (function () {
       const token = cookie.split('=')[1];
       axios.defaults.headers.common['Authorization'] = token;
     }
+    axios.defaults.headers.common['Access-Control-Allow-Origin'] = true;
 
     return object;
   }
